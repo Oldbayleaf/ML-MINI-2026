@@ -1,5 +1,9 @@
 scikit-learn==1.9.1
 pandas==3.0.6
 numpy==2.5.3
+scipy==1.18.1
 matplotlib==3.11.2
 seaborn==0.13.2
+# --- API backend (FastAPI serves the trained models + results to the React UI) ---
+fastapi==0.156.8
+uvicorn[standard]==0.54.0
