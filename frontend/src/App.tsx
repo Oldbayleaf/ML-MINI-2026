@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react'
-import { Activity, FlaskConical, GitCompare, ShieldCheck, Stethoscope } from 'lucide-react'
+import { Activity, FlaskConical, GitCompare, ShieldCheck, Sigma, Stethoscope } from 'lucide-react'
 import { api } from './api'
 import Diagnosis from './pages/Diagnosis'
 import Benchmarks from './pages/Benchmarks'
 import Audit from './pages/Audit'
 import Lab from './pages/Lab'
 import EDA from './pages/EDA'
+import Statistics from './pages/Statistics'
 
-type PageId = 'diagnosis' | 'benchmarks' | 'audit' | 'lab' | 'eda'
+type PageId = 'diagnosis' | 'benchmarks' | 'audit' | 'lab' | 'stats' | 'eda'
 
 const NAV: { id: PageId; label: string; icon: typeof Stethoscope; caption: string }[] = [
   { id: 'diagnosis', label: 'Diagnosis', icon: Stethoscope, caption: 'Live patient' },
   { id: 'benchmarks', label: 'Benchmarks', icon: Activity, caption: 'Model metrics' },
   { id: 'audit', label: 'Audit', icon: ShieldCheck, caption: 'Paper vs ours' },
   { id: 'lab', label: 'Hyperparameter Lab', icon: FlaskConical, caption: 'Sweeps' },
+  { id: 'stats', label: 'Statistical Lens', icon: Sigma, caption: 'Significance' },
   { id: 'eda', label: 'EDA', icon: GitCompare, caption: 'Dataset' },
 ]
 
@@ -94,6 +96,7 @@ export default function App() {
           {page === 'benchmarks' && <Benchmarks />}
           {page === 'audit' && <Audit />}
           {page === 'lab' && <Lab />}
+          {page === 'stats' && <Statistics />}
           {page === 'eda' && <EDA />}
         </div>
       </main>

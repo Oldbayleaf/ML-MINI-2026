@@ -79,6 +79,7 @@ export const api = {
   samplingNoise: () => get<Table>('/api/sampling-noise'),
   roc: (p: 'A' | 'B' | 'C') => get<{ protocol: string; curves: RocCurve[] }>(`/api/roc/${p}`),
   audit: (t: string) => get<Table>(`/api/audit/${t}`),
+  stats: (t: string) => get<Table>(`/api/stats/${t}`),
   lab: (t: string) => get<Table>(`/api/lab/${t}`),
   isolation: () => get<{ records: IsolationRecord[] }>('/api/lab/isolation'),
   eda: (t: string) => get<Table>(`/api/eda/${t}`),
