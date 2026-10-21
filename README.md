@@ -18,6 +18,26 @@ run_replication.py  main script (all steps, commented)
 src/evaluation.py  protocols A/B/C, metrics, isolation forest        EXPLAINER.md  plain-language explanations
 ```
 
+## Modern app (React + FastAPI)
+On top of the untouched replication there is a live app — see `PLAN.md` for the full plan and status.
+
+| Piece | Where | What it does |
+|---|---|---|
+| Backend | `backend/` | FastAPI: loads the six fitted pipelines once, serves inference, audit verdicts, and every `results/` table as JSON, including the Phase-3 stats tables (`/api/stats/{33..38}`). |
+| Frontend | `frontend/` | React + Vite + TypeScript + Tailwind, dark "AI lab" glass UI: **Diagnosis** (live consensus prediction), **Benchmarks** (metrics/ROC/confusion matrices), **Audit** (paper claims ledger), **Hyperparameter Lab**, **EDA**, **Statistical Lens** (repeated CV, McNemar, permutation importance, thresholds). |
+| Statistics | `run_extensions.py` | Tables 33–38: repeated 10×10 CV, exact McNemar pairwise tests, permutation importance, sensitivity/specificity trade-offs, HGB vs paper models. |
+| Tests | `tests/` | 48 pytest checks: API contract, prediction stability, endpoint schemas, exact McNemar math. |
+
+```bash
+# backend (also what the frontend proxies to in dev)
+.venv/bin/pip install -r requirements.txt
+uvicorn backend.app:app --reload
+# frontend
+cd frontend && npm install && npm run dev   # http://localhost:5173
+pytest tests/                               # 48 checks
+npm run build                               # typecheck + production bundle
+```
+
 ## Method in brief
 * Target = `num > 0`. Imputation (median numeric / mode categorical), scaling, one-hot (KNN/SVM/LR) and feature selection all live **inside the sklearn Pipeline**, so they are fitted on training data only.
 * Protocols: **A** 60/40 stratified, **B** 70/30 stratified, **C** 10-fold stratified CV (mean ± std). Metrics on train and test; positive class = disease.
@@ -66,7 +86,7 @@ Also noted: in the decision-tree feature sweep a tree on 3-4 MI-selected feature
 8. **Unspecified:** Isolation Forest hyper-parameters (and whether applied before splitting), the filter method for feature selection, the random seed, and all hyper-parameters except KNN k=8 and the linear kernel.
 
 ## Limitations of this replication
-* 303 patients is small: single-split results move by several points with the seed. I report one seed (42) for A/B as required, plus 10-fold CV with std. I did not run repeated CV.
+* 303 patients is small: single-split results move by several points with the seed. I report one seed (42) for A/B as required, plus 10-fold CV with std. Repeated 10×10 CV now exists as an extension (`run_extensions.py`, table 33): it reorders the leaderboard — LR leads on mean accuracy, and only 3 of 21 McNemar pairs are significant.
 * k and kernel sweeps show test-set curves because the paper does; selection of k/kernel on test data is optimistic. A train-only alternative (inner CV) is also reported for KNN (`12_knn_best_k_summary`).
 * My feature-ranking comparison with the paper uses the whole dataset (descriptive only); model evaluation always selects features inside the training split.
 * The reading of Table 6 (TP/FN/FP/TN) is an inference from internal consistency, not something the paper confirms.
