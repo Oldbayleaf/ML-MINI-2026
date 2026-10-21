@@ -1,0 +1,7 @@
+model,precision,recall,F1 reported,"F1 recomputed from P,R",mismatch,"F1 outside [min(P,R), max(P,R)]?"
+Decision Tree,0.778,0.7548,0.864,0.7662,0.0978,True
+Naive Bayes,0.854,0.804,0.865,0.8282,0.0368,True
+Random Forest,0.887,0.832,0.879,0.8586,0.0204,False
+KNN,0.917,0.948,0.908,0.9322,-0.0242,True
+SVM,0.907,0.878,0.885,0.8923,-0.0073,False
+Logistic Regression,0.881,0.861,0.865,0.8709,-0.0059,False

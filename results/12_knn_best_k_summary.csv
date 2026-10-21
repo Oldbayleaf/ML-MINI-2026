@@ -1,0 +1,3 @@
+metric,best k (test A),best k (test B),best k (10-fold CV),k chosen by inner CV on train-B,its test-B acc,acc at k=8: A / B / CV
+euclidean,5,6,5,4,0.835,0.828 / 0.868 / 0.838
+manhattan,8,8,14,3,0.835,0.893 / 0.879 / 0.815

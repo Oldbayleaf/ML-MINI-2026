@@ -1,0 +1,15 @@
+model,split,tp,fn,fp,tn
+Decision Tree,train,97,0,0,115
+Decision Tree,test,30,12,12,37
+Naive Bayes,train,77,20,13,102
+Naive Bayes,test,39,3,8,41
+Random Forest,train,97,0,0,115
+Random Forest,test,34,8,7,42
+KNN,train,75,22,12,103
+KNN,test,33,9,3,46
+SVM,train,78,19,12,103
+SVM,test,34,8,8,41
+Logistic Regression,train,79,18,12,103
+Logistic Regression,test,35,7,6,43
+Random Forest (tuned),train,77,20,7,108
+Random Forest (tuned),test,34,8,5,44

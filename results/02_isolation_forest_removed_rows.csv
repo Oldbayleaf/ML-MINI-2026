@@ -1,0 +1,4 @@
+contamination,train rows,removed,removed with disease,removed without disease
+,212,0,0,0
+0.05,212,11,6,5
+0.1,212,22,12,10

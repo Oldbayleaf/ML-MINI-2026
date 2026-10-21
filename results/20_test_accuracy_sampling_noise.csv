@@ -1,0 +1,15 @@
+model,protocol,n_test,accuracy,95% CI half-width
+Decision Tree,A,122,0.721,0.08
+Decision Tree,B,91,0.736,0.091
+Naive Bayes,A,122,0.885,0.057
+Naive Bayes,B,91,0.879,0.067
+Random Forest,A,122,0.869,0.06
+Random Forest,B,91,0.835,0.076
+KNN,A,122,0.828,0.067
+KNN,B,91,0.868,0.07
+SVM,A,122,0.844,0.064
+SVM,B,91,0.824,0.078
+Logistic Regression,A,122,0.893,0.055
+Logistic Regression,B,91,0.857,0.072
+Random Forest (tuned),A,122,0.877,0.058
+Random Forest (tuned),B,91,0.857,0.072

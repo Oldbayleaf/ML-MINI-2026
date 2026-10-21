@@ -1,0 +1,8 @@
+model,accuracy,precision,recall,f1,auc
+Decision Tree,0.736,0.714,0.714,0.714,0.735
+Naive Bayes,0.879,0.83,0.929,0.876,0.93
+Random Forest,0.835,0.829,0.81,0.819,0.916
+KNN,0.868,0.917,0.786,0.846,0.91
+SVM,0.824,0.81,0.81,0.81,0.907
+Logistic Regression,0.857,0.854,0.833,0.843,0.929
+Random Forest (tuned),0.857,0.872,0.81,0.84,0.931

@@ -1,0 +1,11 @@
+paper claim,evidence from my runs
+KNN is the most accurate model,"A: Logistic Regression (0.893); KNN=0.828, rank 5/6 | B: Naive Bayes (0.879); KNN=0.868, rank 2/6 | C: KNN (0.838); KNN=0.838, rank 1/6"
+KNN has the highest recall,"A: Naive Bayes (0.929); KNN=0.732, rank 5/6 | B: Naive Bayes (0.929); KNN=0.786, rank 5/6 | C: Naive Bayes (0.791); KNN=0.762, rank 4/6"
+RF has the highest AUC (0.898) and KNN the lowest (0.799),"A: Logistic Regression (0.938); KNN=0.911, rank 5/6 | B: Naive Bayes (0.930); KNN=0.910, rank 4/6 | C: Logistic Regression (0.912); KNN=0.897, rank 5/6"
+KNN best at k=8 (Euclidean),"best k Euclid. -> test A: 5, test B: 6, 10-fold CV: 5; acc at k=8 (10-fold CV): 0.838 vs best 0.845"
+"Euclidean vs Manhattan (k=8, 10-fold CV acc)",euclidean 0.838 vs manhattan 0.815; best-k CV acc: 0.845 vs 0.851
+Linear kernel is the best SVM kernel,"best kernel -> A: rbf (0.861; linear 0.844), B: rbf (0.857; linear 0.824), C: linear (0.835; linear 0.835)"
+Entropy (information gain) tree vs Gini,acc A/B/C entropy 0.721/0.736/0.732  gini 0.713/0.681/0.692
+RF/DT/NB reach 100% training accuracy,"train acc (B): Random Forest 1.000, Decision Tree 1.000, Naive Bayes 0.844"
+"Selected 7 features = age, sex, cp, fbs, chol, slope, ca",overlap with MI top-7: 4/7; with chi2 top-7: 4/7
+"Mean test accuracy over the 6 models, 13 vs paper's 7 features","C: all13 0.817, paper7 0.790, MI7 0.818"

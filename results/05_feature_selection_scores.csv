@@ -1,0 +1,14 @@
+,MI,MI_rank,chi2,chi2_rank,in_paper_top7,MI_top7_in_folds(of 10)
+thal,0.143,1,44.878,1,False,10
+cp,0.1421,2,7.3849,7,True,10
+ca,0.1258,3,28.0384,3,True,10
+oldpeak,0.1027,4,11.3827,4,False,9
+exang,0.0964,5,38.0526,2,False,10
+chol,0.0893,6,0.1111,13,True,4
+slope,0.0779,7,10.9843,5,True,9
+thalach,0.0736,8,2.6706,9,False,8
+sex,0.0397,9,7.4328,6,True,0
+restecg,0.0167,10,4.3224,8,False,0
+fbs,0.0003,11,0.1647,12,True,0
+age,0.0,12,1.0059,10,True,0
+trestbps,0.0,12,0.5326,11,False,0

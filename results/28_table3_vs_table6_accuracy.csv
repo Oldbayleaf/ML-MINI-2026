@@ -1,0 +1,7 @@
+model,Table 3 accuracy,Table 6 implied accuracy,Table 6 correct/91,inflation (T3 - T6),"my acc, B (70/30)"
+Decision Tree,0.7898,0.7802,71,0.0096,0.7363
+Naive Bayes,0.8678,0.8242,75,0.0436,0.8791
+Random Forest,0.879,0.8242,75,0.0548,0.8352
+KNN,0.941,0.8681,79,0.0729,0.8681
+SVM,0.891,0.8791,80,0.0119,0.8242
+Logistic Regression,0.871,0.8681,79,0.0029,0.8571

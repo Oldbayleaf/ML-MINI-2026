@@ -1,0 +1,4 @@
+,train,test
+sklearn 60/40 (A),181,122
+sklearn 70/30 (B),212,91
+paper's confusion matrices,212,91
