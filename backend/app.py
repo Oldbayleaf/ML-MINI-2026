@@ -330,6 +330,25 @@ def audit(table: str) -> dict:
     return _records(_read(mapping[table]), "model")
 
 
+# ---- statistical extensions (Phase 3) ------------------------------------
+@app.get("/api/stats/{table}")
+def stats(table: str) -> dict:
+    """Serve the run_extensions.py tables (33-38): repeated-CV stability, McNemar,
+    clinical operating points, threshold sweep, permutation importance, HGB baseline."""
+    mapping = {
+        "stability": ("33_repeated_cv_stability", "model"),
+        "mcnemar": ("34_mcnemar_pairwise", "model_a"),
+        "operating-points": ("35_clinical_operating_points", "model"),
+        "threshold-sweep": ("36_threshold_sweep", "model"),
+        "permutation": ("37_permutation_importance", "model"),
+        "hgb": ("38_hgb_across_protocols", "protocol"),
+    }
+    if table not in mapping:
+        raise HTTPException(404, f"unknown stats table '{table}'")
+    name, key = mapping[table]
+    return _records(_read(name), key)
+
+
 # ---- hyperparameter lab --------------------------------------------------
 @app.get("/api/lab/{table}")
 def lab(table: str) -> dict:
