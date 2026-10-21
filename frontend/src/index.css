@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-base-950 text-slate-200 font-sans;
+    /* lab canvas: faint grid + two coloured glows */
+    background-image: linear-gradient(rgba(129, 140, 248, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(129, 140, 248, 0.035) 1px, transparent 1px),
+      radial-gradient(circle at 15% -10%, rgba(129, 140, 248, 0.14), transparent 55%),
+      radial-gradient(circle at 85% 110%, rgba(34, 211, 238, 0.1), transparent 55%);
+    background-size: 32px 32px, 32px 32px, cover, cover;
+  }
+  ::selection {
+    @apply bg-accent-indigo/30 text-white;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-white/10;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/20;
+  }
+}
+
+@layer components {
+  /* Frosted-glass card — the core surface of the whole UI. */
+  .glass {
+    @apply rounded-2xl border border-white/[0.07] bg-white/[0.04] shadow-glass backdrop-blur-xl;
+  }
+  .glass-hover {
+    @apply transition-all duration-200 hover:border-accent-indigo/30 hover:bg-white/[0.06];
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium;
+  }
+  .label-mono {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-indigo via-accent-cyan to-accent-emerald bg-clip-text text-transparent;
+  }
+  .num {
+    @apply font-mono tabular-nums;
+  }
+}
