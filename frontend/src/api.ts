@@ -49,13 +49,6 @@ export interface RocCurve {
   points: [number, number][]
 }
 
-export interface IsolationRecord {
-  model: string
-  protocol: string
-  outlier: string
-  accuracy: number
-}
-
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(path)
   if (!res.ok) throw new Error(`${path} → HTTP ${res.status}`)
@@ -76,33 +69,8 @@ export const api = {
   },
   benchmarks: (p: 'A' | 'B' | 'C') => get<Table>(`/api/benchmarks/${p}`),
   confusion: (p: 'B') => get<Table>(`/api/confusion/${p}`),
-  samplingNoise: () => get<Table>('/api/sampling-noise'),
   roc: (p: 'A' | 'B' | 'C') => get<{ protocol: string; curves: RocCurve[] }>(`/api/roc/${p}`),
   audit: (t: string) => get<Table>(`/api/audit/${t}`),
-  stats: (t: string) => get<Table>(`/api/stats/${t}`),
-  lab: (t: string) => get<Table>(`/api/lab/${t}`),
-  isolation: () => get<{ records: IsolationRecord[] }>('/api/lab/isolation'),
-  eda: (t: string) => get<Table>(`/api/eda/${t}`),
-  classBalance: () => get<{ labels: string[]; counts: number[]; total: number }>('/api/eda/class-balance'),
-  distributions: () =>
-    get<
-      Record<
-        string,
-        {
-          by_target: {
-            target: number
-            mean: number
-            std: number
-            q25: number
-            q50: number
-            q75: number
-            min: number
-            max: number
-            values: number[]
-          }[]
-        }
-      >
-    >('/api/eda/distributions'),
 }
 
 /** Convert a column-oriented table into an array of row objects. */

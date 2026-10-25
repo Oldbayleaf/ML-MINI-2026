@@ -62,27 +62,6 @@ export function ErrorBox({ error }: { error: string }) {
 }
 
 /* ------------------------------------------------------------------ pieces */
-export function Stat({ label, value, hint, tone = 'default' }: {
-  label: string
-  value: ReactNode
-  hint?: ReactNode
-  tone?: 'default' | 'good' | 'warn' | 'bad'
-}) {
-  const tones = {
-    default: 'text-white',
-    good: 'text-accent-emerald',
-    warn: 'text-accent-amber',
-    bad: 'text-accent-rose',
-  } as const
-  return (
-    <div className="glass glass-hover p-4">
-      <p className="label-mono">{label}</p>
-      <p className={`num mt-2 text-2xl font-semibold ${tones[tone]}`}>{value}</p>
-      {hint && <p className="mt-1 text-xs text-slate-400">{hint}</p>}
-    </div>
-  )
-}
-
 export function Badge({ children, tone = 'slate' }: {
   children: ReactNode
   tone?: 'slate' | 'good' | 'warn' | 'bad' | 'indigo' | 'cyan'
@@ -140,7 +119,3 @@ export function Meter({ value, tone }: { value: number; tone: 'good' | 'warn' | 
   )
 }
 
-/** withData: tiny loader/error wrapper around an async fetch. */
-export function withData<T>(promise: Promise<T>, set: (v: T | null) => void, err: (e: string) => void) {
-  promise.then(set).catch((e) => err(String(e)))
-}

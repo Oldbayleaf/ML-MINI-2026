@@ -33,6 +33,11 @@ phases land. The original replication (paper code, `run_replication.py`, static
   `/api/stats/*` route, tests, and the **Statistical Lens** page.
 - [x] **Phase 4** — Verification: full pytest run, `tsc` typecheck + production
   build, browser walkthrough of every page against live data, README updates.
+- [x] **Phase 5** — Simplification (user request): dashboard cut to three core
+  pages — Diagnosis, Benchmarks, Audit. The Hyperparameter Lab, EDA and
+  Statistical Lens pages were deleted from the app (their content stays
+  available in `results/`, the API routes, README and DOCUMENTATION), page
+  copy tightened, dead client/UI code removed, docs updated to match.
 
 ## Findings worth keeping
 

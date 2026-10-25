@@ -97,9 +97,9 @@ export default function Diagnosis() {
   return (
     <div>
       <PageHeader
-        eyebrow="Tab 1 · Live inference"
+        eyebrow="Live inference"
         title="Patient Diagnosis"
-        description="Adjust the clinical measurements and watch all six pipelines vote. Each model was fit on the 70% training split only; probabilities are Platt-calibrated so a raw SVM margin never masquerades as a risk score."
+        description="Adjust the clinical measurements and watch all six pipelines vote — calibrated probabilities, honest held-out scores."
       />
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
@@ -205,7 +205,7 @@ export default function Diagnosis() {
                 </div>
               </Card>
 
-              <Card title="Per-model verdicts" subtitle="Hard vote + calibrated probability (Platt sigmoid on the train split)">
+              <Card title="Per-model verdicts" subtitle="Hard vote + calibrated probability">
                 <div className="space-y-3.5">
                   {result.models.map((m) => {
                     const t = toneFor(m.probability)

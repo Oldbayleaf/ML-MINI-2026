@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import {
   CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts'
-import { api, pct, toRows, type RocCurve, type Table } from '../api'
+import { api, type RocCurve, type Table } from '../api'
 import { Badge, Card, ErrorBox, PageHeader, Spinner, Tabs } from '../components/ui'
 import DataTable from '../components/DataTable'
 
@@ -31,7 +31,6 @@ export default function Benchmarks() {
   const [table, setTable] = useState<Table | null>(null)
   const [roc, setRoc] = useState<RocCurve[]>([])
   const [confusion, setConfusion] = useState<Table | null>(null)
-  const [noise, setNoise] = useState<Table | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -52,30 +51,18 @@ export default function Benchmarks() {
 
   useEffect(() => {
     api.confusion('B').then(setConfusion).catch(() => setConfusion(null))
-    api.samplingNoise().then(setNoise).catch(() => setNoise(null))
   }, [])
 
   const rocSeries = useMemo(() => (roc.length ? toRocSeries(roc) : []), [roc])
-  const noiseSeries = useMemo(() => {
-    if (!noise) return []
-    // rows: model, protocol, n_test, accuracy, '95% CI half-width' — plot protocol B (the paper's setting)
-    return toRows(noise)
-      .filter((r) => String(r.protocol) === 'B')
-      .map((r) => ({
-        model: String(r.model),
-        accuracy: Number(r.accuracy),
-        ci: Number(r['95% CI half-width']),
-      }))
-  }, [noise])
 
   const blurb = PROTOCOLS.find((p) => p.id === protocol)!.blurb
 
   return (
     <div>
       <PageHeader
-        eyebrow="Tab 2 · Model comparison"
+        eyebrow="Model comparison"
         title="Benchmarks"
-        description="How the six pipelines score under three evaluation protocols, with ROC curves, the held-out confusion matrix and a sampling-noise check that shows how fragile a single 91-patient test split really is."
+        description="How the six pipelines score under three evaluation protocols — held-out metrics, ROC curves and the confusion matrix."
       />
 
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
@@ -141,26 +128,6 @@ export default function Benchmarks() {
               {confusion ? <DataTable table={confusion} keyName="model" dense /> : <Spinner label="No confusion table" />}
             </Card>
           </div>
-
-          {noiseSeries.length > 0 && (
-            <Card
-              title="Sampling noise"
-              subtitle="Test accuracy across repeated resamples — the gap between models is often smaller than the noise"
-            >
-              <ResponsiveContainer width="100%" height={280}>
-                <LineChart data={noiseSeries} margin={{ top: 5, right: 10, left: -18, bottom: 0 }}>
-                  <CartesianGrid stroke="rgba(255,255,255,0.06)" />
-                  <XAxis dataKey="model" tick={{ fill: '#64748b', fontSize: 10 }} interval={0} angle={-20} height={60} textAnchor="end" />
-                  <YAxis domain={['auto', 'auto']} tick={{ fill: '#64748b', fontSize: 11 }} tickFormatter={(v) => pct(Number(v), 0)} />
-                  <Tooltip
-                    contentStyle={{ background: '#0d1220', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, fontSize: 12 }}
-                    formatter={(v: number) => [pct(v, 1), 'accuracy']}
-                  />
-                  <Line type="monotone" dataKey="accuracy" stroke="#22d3ee" strokeWidth={2} dot={{ r: 3, fill: '#22d3ee' }} />
-                </LineChart>
-              </ResponsiveContainer>
-            </Card>
-          )}
         </div>
       )}
     </div>

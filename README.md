@@ -24,7 +24,7 @@ On top of the untouched replication there is a live app — see `PLAN.md` for th
 | Piece | Where | What it does |
 |---|---|---|
 | Backend | `backend/` | FastAPI: loads the six fitted pipelines once, serves inference, audit verdicts, and every `results/` table as JSON, including the Phase-3 stats tables (`/api/stats/{33..38}`). |
-| Frontend | `frontend/` | React + Vite + TypeScript + Tailwind, dark "AI lab" glass UI: **Diagnosis** (live consensus prediction), **Benchmarks** (metrics/ROC/confusion matrices), **Audit** (paper claims ledger), **Hyperparameter Lab**, **EDA**, **Statistical Lens** (repeated CV, McNemar, permutation importance, thresholds). |
+| Frontend | `frontend/` | React + Vite + TypeScript + Tailwind, dark "AI lab" glass UI, deliberately kept to three focused pages: **Diagnosis** (live consensus prediction), **Benchmarks** (metrics/ROC/confusion matrices), **Audit** (paper claims ledger). Sweep plots, EDA and significance studies live in `results/` and the API rather than the UI. |
 | Statistics | `run_extensions.py` | Tables 33–38: repeated 10×10 CV, exact McNemar pairwise tests, permutation importance, sensitivity/specificity trade-offs, HGB vs paper models. |
 | Tests | `tests/` | 48 pytest checks: API contract, prediction stability, endpoint schemas, exact McNemar math. |
 
